@@ -8,7 +8,7 @@ function Square({ value, onSquareClick }) {
     );
   }
 
-export function Board() {
+export function Board({ xIsNext, squares, onPlay }) {
 
     const [xIsNext, setXIsNext] = useState(true);
     const [squares, setSquares] = useState(Array(9).fill(null));
@@ -26,6 +26,7 @@ export function Board() {
 
         setSquares(nextSquares);
         setXIsNext(!xIsNext);
+        onPlay(nextSquares);
       }
 
     const winner = calculateWinner(squares);
@@ -84,7 +85,8 @@ export function Board() {
     const currentSquares = history[history.length - 1];
 
     function handlePlay(nextSquares) {
-        // TODO
+        setHistory([...history, nextSquares]);
+        setXIsNext(!xIsNext);
       }
 
     return (
